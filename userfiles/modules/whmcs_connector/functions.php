@@ -48,15 +48,15 @@ event_bind('mw.ui.admin.login.form.after', function ($params = false) {
     }
     
     if (strpos(mw_root_path(), 'httpdocs') !== false) {
-    $username_path = explode('httpdocs', mw_root_path());
-        if (isset($username_path[0])) {
-            $username_path = explode('/', $username_path[0]);
-            if ($username_path) {
-                $username_path = array_filter($username_path);
-                if ($username_path) {
-                    $username_path = array_pop($username_path);
-                    if ($username_path) {
-                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
+    $domain_name_path = explode('httpdocs', mw_root_path());
+        if (isset($domain_name_path[0])) {
+            $domain_name_path = explode('/', $domain_name_path[0]);
+            if ($domain_name_path) {
+                $domain_name_path = array_filter($domain_name_path);
+                if ($domain_name_path) {
+                    $domain_name_path = array_pop($domain_name_path);
+                    if ($domain_name_path) {
+                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&domain=' . $domain_name_path . '&return_domain=' . site_url();
                     }
                 }
             }
