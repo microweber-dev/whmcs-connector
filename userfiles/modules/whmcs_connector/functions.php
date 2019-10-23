@@ -28,29 +28,41 @@ event_bind('mw.user.before_login', function ($params = false) {
 });
 
 event_bind('mw.ui.admin.login.form.after', function ($params = false) {
-
-    //$btn_url = 'https://members.microweber.com/go_to_product.php?domain=' . site_url();
-
+    
     $btn_url = mw_whmcs_remote_get_connector_url().'index.php?m=microweber_addon&function=go_to_product&domain='. site_url();
 
-
-
-
-
-    $username_path = explode('public_html', mw_root_path());
-    if (isset($username_path[0])) {
-        $username_path = explode('/', $username_path[0]);
-        if ($username_path) {
-            $username_path = array_filter($username_path);
+    if (strpos(mw_root_path(), 'public_html') !== false) {
+        $username_path = explode('public_html', mw_root_path());
+        if (isset($username_path[0])) {
+            $username_path = explode('/', $username_path[0]);
             if ($username_path) {
-                $username_path = array_pop($username_path);
+                $username_path = array_filter($username_path);
                 if ($username_path) {
-                    $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
+                    $username_path = array_pop($username_path);
+                    if ($username_path) {
+                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
+                    }
                 }
             }
         }
     }
-
+    
+    if (strpos(mw_root_path(), 'httpdocs') !== false) {
+    $username_path = explode('httpdocs', mw_root_path());
+        if (isset($username_path[0])) {
+            $username_path = explode('/', $username_path[0]);
+            if ($username_path) {
+                $username_path = array_filter($username_path);
+                if ($username_path) {
+                    $username_path = array_pop($username_path);
+                    if ($username_path) {
+                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
+                    }
+                }
+            }
+        }
+    }
+    
     print "<center>";
     print "<h4>OR</h4>";
 
