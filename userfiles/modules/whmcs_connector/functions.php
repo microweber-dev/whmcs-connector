@@ -314,7 +314,7 @@ event_bind('mw.front', function () {
             top: 54px;
         }
         .nav-bar {
-            top: 54px
+            top: 54px !important;
         }
         </style>
     ';
