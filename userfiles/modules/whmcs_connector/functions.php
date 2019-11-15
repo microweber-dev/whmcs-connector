@@ -301,6 +301,7 @@ event_bind('mw.front', function () {
         .js-microweber-add-iframe {
             z-index: 99999;
             position: fixed;
+            min-height: 0;
             height: 54px !important;
             border: 0;
             left: 0;
@@ -311,6 +312,9 @@ event_bind('mw.front', function () {
         }
         .sticky-nav .sticky, .navigation-holder, .header-section.sticker{
             top: 54px;
+        }
+        .nav-bar {
+            top: 54px
         }
         </style>
     ';
