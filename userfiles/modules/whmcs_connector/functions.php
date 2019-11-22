@@ -28,7 +28,17 @@ event_bind('mw.user.before_login', function ($params = false) {
 });
 
 event_bind('mw.ui.admin.login.form.after', function ($params = false) {
-    
+
+    $brandingContent = @file_get_contents(MW_WHITE_LABEL_SETTINGS_FILE_LOCAL);
+    $whiteLabelSettings = json_decode($brandingContent, TRUE);
+    if (is_array($whiteLabelSettings)) {
+
+        if (isset($whiteLabelSettings['external_login_server_enable']) && $whiteLabelSettings['external_login_server_enable'] == false) {
+            return;
+        }
+
+    }
+
     $btn_url = mw_whmcs_remote_get_connector_url().'index.php?m=microweber_addon&function=go_to_product&domain='. site_url();
 
     if (strpos(mw_root_path(), 'public_html') !== false) {
@@ -64,12 +74,19 @@ event_bind('mw.ui.admin.login.form.after', function ($params = false) {
     }
     
     print "<center>";
-    print "<h4>OR</h4>";
+    print "<h4>" . _e('OR', true). "</h4>";
 
-    print "<h4>Use Microweber.com Account</h4>";
+   /* print "<h4>Use Microweber.com Account</h4>";
+   */
     print "<br>";
 
-    print '<a class="mw-ui-btn  mw-ui-btn-info mw-ui-btn-big" href="' . $btn_url . '"><span class="mw-icon-login"></span>Login with your account</a>';
+    $login_button = _e('Login with your account', true);
+
+    if (isset($whiteLabelSettings['external_login_server_button_text'])) {
+        $login_button = $whiteLabelSettings['external_login_server_button_text'];
+    }
+
+    print '<a class="mw-ui-btn  mw-ui-btn-info mw-ui-btn-big" href="' . $btn_url . '"><span class="mw-icon-login"></span>'.$login_button.'</a>';
     print "</center>";
 
 
