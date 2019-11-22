@@ -282,6 +282,10 @@ function showMicroweberAdsBar() {
         $whmcsUrl = false;
         $whmcsSettingsFileContent = file_get_contents($whmcsSettingsFile);
         $settings = json_decode($whmcsSettingsFileContent, true);
+
+        if (isset($settings['show_ads_bar']) && $settings['show_ads_bar'] == false) {
+            return array('show'=>false);
+        }
         if (isset($settings['url'])) {
             $whmcsUrl = $settings['url'];
         }
