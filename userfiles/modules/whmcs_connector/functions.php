@@ -39,7 +39,7 @@ event_bind('mw.ui.admin.login.form.after', function ($params = false) {
 
     }
 
-    $btn_url = mw_whmcs_remote_get_connector_url().'index.php?m=microweber_addon&function=go_to_product&domain='. site_url();
+    $btn_url = mw_whmcs_remote_get_connector_url().'/index.php?m=microweber_addon&function=go_to_product&domain='. site_url();
 
     if (strpos(mw_root_path(), 'public_html') !== false) {
         $username_path = explode('public_html', mw_root_path());
@@ -50,7 +50,7 @@ event_bind('mw.ui.admin.login.form.after', function ($params = false) {
                 if ($username_path) {
                     $username_path = array_pop($username_path);
                     if ($username_path) {
-                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
+                        $btn_url = mw_whmcs_remote_get_connector_url().   '/index.php?m=microweber_addon&function=go_to_product&username2=' . $username_path . '&return_domain=' . site_url();
                     }
                 }
             }
@@ -66,7 +66,7 @@ event_bind('mw.ui.admin.login.form.after', function ($params = false) {
                 if ($domain_name_path) {
                     $domain_name_path = array_pop($domain_name_path);
                     if ($domain_name_path) {
-                        $btn_url = mw_whmcs_remote_get_connector_url().   'index.php?m=microweber_addon&function=go_to_product&domain=' . $domain_name_path . '&return_domain=' . site_url();
+                        $btn_url = mw_whmcs_remote_get_connector_url().   '/index.php?m=microweber_addon&function=go_to_product&domain=' . $domain_name_path . '&return_domain=' . site_url();
                     }
                 }
             }
@@ -226,7 +226,7 @@ function mw_whmcs_remote_user_login_exec($params)
         $cache_time = intval($params['cache']);
     }
 
-    $url = mw_whmcs_remote_get_connector_url().'index.php?m=microweber_addon&function=login_to_my_website';
+    $url = mw_whmcs_remote_get_connector_url().'/index.php?m=microweber_addon&function=login_to_my_website';
 
 
 
@@ -294,7 +294,7 @@ function showMicroweberAdsBar() {
         }
 
         if ($whmcsUrl) {
-            $checkDomainUrl = $whmcsUrl . 'index.php?m=microweber_addon&function=check_domain_is_premium&domain=' . $_SERVER['HTTP_HOST'];
+            $checkDomainUrl = $whmcsUrl . '/index.php?m=microweber_addon&function=check_domain_is_premium&domain=' . $_SERVER['HTTP_HOST'];
             $checkDomain = file_get_contents($checkDomainUrl);
             $checkDomain = json_decode($checkDomain, true);
 
